@@ -75,32 +75,7 @@ Dit programma is ontwikkeld met het oog op flexibiliteit en uitbreidbaarheid. Ni
 
 Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een krachtige en veelzijdige oplossing voor servo- en robotica-projecten.
 
-## Flowchart
-
-```mermaid
-graph TD
-    A[while (Serial.available())] --> B[char received = Serial.read()]
-    B --> C{received == '>'}
-    C -->|YES| D[inputBuffer += received]
-    D --> E[commandHandler.processCommand(inputBuffer)]
-    E --> F[inputBuffer = ""]
-    C -->|NO| G{received == '<'}
-    G -->|YES| H[inputBuffer = "<"]
-    G -->|NO| I[inputBuffer += received]
-
-
-## Flowchart
-
-```mermaid
-graph TD
-    A[Start: while (Serial.available())] --> B[char received = Serial.read()]
-    B --> C{received == '>'}
-    C -->|YES| D[inputBuffer += received]
-    D --> E[commandHandler.processCommand(inputBuffer)]
-    E --> F[inputBuffer = ""]
-    C -->|NO| G{received == '<'}
-    G -->|YES| H[inputBuffer = "<"]
-    G -->|NO| I[inputBuffer += received]
+![Mijn afbeelding](flow_serial.png)
 
 
 
