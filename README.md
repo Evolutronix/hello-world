@@ -77,9 +77,8 @@ Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een k
 
 ![Mijn afbeelding](flow_serial.png)
 
-```mermaid
-%% Gebruik code syntax highlighting voor een visueel effect
-code
+```markdown
+```cpp
 void processCommand(String command) {
     if (command.length() < 3) return;
     command = command.substring(1, command.length() - 1);
