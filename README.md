@@ -95,7 +95,9 @@ Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een k
   }
 
 ```
+![Mijn afbeelding](flow_command_a.png)
 
+![Mijn afbeelding](flow_command_b.png)
 
 # C++ Example
 
