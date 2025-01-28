@@ -89,4 +89,19 @@ graph TD
     G -->|NO| I[inputBuffer += received]
 
 
+## Flowchart
+
+```mermaid
+graph TD
+    A[Start: while (Serial.available())] --> B[char received = Serial.read()]
+    B --> C{received == '>'}
+    C -->|YES| D[inputBuffer += received]
+    D --> E[commandHandler.processCommand(inputBuffer)]
+    E --> F[inputBuffer = ""]
+    C -->|NO| G{received == '<'}
+    G -->|YES| H[inputBuffer = "<"]
+    G -->|NO| I[inputBuffer += received]
+
+
+
 
