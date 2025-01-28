@@ -77,6 +77,29 @@ Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een k
 
 ![Mijn afbeelding](flow_serial.png)
 
+```mermaid
+%% Gebruik code syntax highlighting voor een visueel effect
+code
+void processCommand(String command) {
+    if (command.length() < 3) return;
+    command = command.substring(1, command.length() - 1);
+
+    int firstComma = command.indexOf(',');
+    String mainCommand = (firstComma != -1) ? command.substring(0, firstComma) : command;
+    String parameters = (firstComma != -1) ? command.substring(firstComma + 1) : "";
+
+    if (mainCommand == "SEQ_SAVE") {
+      Serial.println(F("seq ontvangen"));
+      processSeqSave(parameters);
+    } else if (mainCommand == "PLAY") {
+        currentState = PLAY_SEQUENCE;
+        stateChangeTime = millis(); // Reset de timer
+    } else if (mainCommand == "STOP") {
+        stopSequence(); // Nieuwe functie om te stoppen  
+    } else {
+      Serial.println("Onbekend commando!");
+    }
+}
 
 
 
