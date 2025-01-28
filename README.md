@@ -88,3 +88,4 @@ graph TD
     G -->|YES| H[inputBuffer = "<"]
     G -->|NO| I[inputBuffer += received]
 
+
