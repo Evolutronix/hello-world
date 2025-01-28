@@ -77,6 +77,24 @@ Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een k
 
 ![Mijn afbeelding](flow_serial.png)
 
+# C++ Example
+
+```cpp
+  while (Serial.available()) {
+    char received = Serial.read();
+    if (received == '>') {
+      inputBuffer += received;
+      commandHandler.processCommand(inputBuffer);
+      inputBuffer = "";
+    } else if (received == '<') {
+      inputBuffer = "<";
+    } else {
+      inputBuffer += received;
+      
+    }
+  }
+
+```
 
 
 # C++ Example
