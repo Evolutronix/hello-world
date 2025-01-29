@@ -1,6 +1,8 @@
-# hello-world
+
 this repository is for practicing.
-to make a GUI in C++/CLI to control servo's with arduino and PCA9685.
+to make a GUI in visual studio  C++/CLI to control servo's with arduino nano every and PCA9685 servo controller and HC-05 bluetooth.
+Je ziet eerst de code waar mee begonnen is. Deze is makkelijker te begrijpen.
+Daarna optimaliseren we de code en leggen uit waarom e.e.a. een verbetering is.
 
 ![Mijn afbeelding](evolutronix.png)
 
