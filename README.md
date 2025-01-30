@@ -156,6 +156,30 @@ We kijken nu naar elk command, beginnend bij `SEQ_SAVE`.
 
 #### Command: `SEQ_SAVE`
 
+# C++ Example
+
+```cpp
+// Structuur voor een enkele Servo-actie
+struct ServoAction {
+  uint8_t servoId;
+  uint8_t position;
+  uint8_t speed;
+};
+
+// Structuur voor een Sequence
+struct Sequence {
+  String name;
+  ServoAction servoActions[11]; // Maximaal 11 servos per sequence
+  uint8_t actionCount;             // Aantal acties in deze sequence
+};
+
+// Maximaal aantal sequences
+#define MAX_SEQUENCES 16
+Sequence sequences[MAX_SEQUENCES];
+uint8_t sequenceCount = 0; // Huidig aantal opgeslagen sequences
+
+```
+
 Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt als volgt:
 
 1. Controleert of het maximale aantal sequences is bereikt.  
