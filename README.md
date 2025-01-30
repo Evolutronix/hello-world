@@ -105,32 +105,6 @@ Hier zal de String opgedeeld worden in het mainCommand en parameters.
 
 
 
-### Command Processing: `SEQ_SAVE`
-
-Daarna zal gekeken worden wat het `mainCommand` is en verder doorgestuurd worden naar de bijbehorende functie.
-
-We kijken nu naar elk command, beginnend bij `SEQ_SAVE`.
-
-#### Command: `SEQ_SAVE`
-
-Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt als volgt:
-
-1. Controleert of het maximale aantal sequences is bereikt.  
-   - Als dit het geval is, keert de functie terug.
-2. Zo niet, dan zal de functie:
-   - De string scheiden in de naam van de sequence en de rest van de string.
-   - De `actionCount` resetten naar `0`.
-3. Vervolgens controleert de functie:
-   - Of `actionCount` kleiner is dan `12`.
-   - En of de stringlengte groter is dan `0`.
-4. Indien beide voorwaarden waar zijn:
-   - Wordt de eerste positie en snelheid (`speed`) uit de string gehaald.
-   - Deze waarden worden opgeslagen in `action[actionCount]` (positie en snelheid).
-   - De `actionCount` wordt verhoogd.
-   - De functie begint opnieuw, totdat de string leeg is **of** `actionCount > 12`.
-5. Als de string leeg is of de limiet is bereikt:
-   - Wordt de `sequenceCount` verhoogd.
-   - En de functie begint met de volgende sequence.
 
 
 
@@ -174,5 +148,31 @@ void processCommand(String command) {
 
 ```
 
+### Command Processing: `SEQ_SAVE`
+
+Daarna zal gekeken worden wat het `mainCommand` is en verder doorgestuurd worden naar de bijbehorende functie.
+
+We kijken nu naar elk command, beginnend bij `SEQ_SAVE`.
+
+#### Command: `SEQ_SAVE`
+
+Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt als volgt:
+
+1. Controleert of het maximale aantal sequences is bereikt.  
+   - Als dit het geval is, keert de functie terug.
+2. Zo niet, dan zal de functie:
+   - De string scheiden in de naam van de sequence en de rest van de string.
+   - De `actionCount` resetten naar `0`.
+3. Vervolgens controleert de functie:
+   - Of `actionCount` kleiner is dan `12`.
+   - En of de stringlengte groter is dan `0`.
+4. Indien beide voorwaarden waar zijn:
+   - Wordt de eerste positie en snelheid (`speed`) uit de string gehaald.
+   - Deze waarden worden opgeslagen in `action[actionCount]` (positie en snelheid).
+   - De `actionCount` wordt verhoogd.
+   - De functie begint opnieuw, totdat de string leeg is **of** `actionCount > 12`.
+5. Als de string leeg is of de limiet is bereikt:
+   - Wordt de `sequenceCount` verhoogd.
+   - En de functie begint met de volgende sequence.
 
 
