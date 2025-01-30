@@ -180,7 +180,7 @@ uint8_t sequenceCount = 0; // Huidig aantal opgeslagen sequences
 
 ```
 
-
+![Mijn afbeelding](Struct.png)
 
 
 
