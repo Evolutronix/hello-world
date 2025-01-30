@@ -4,6 +4,12 @@ to make a GUI in visual studio  C++/CLI to control servo's with arduino nano eve
 Je ziet eerst de code waar mee begonnen is. Deze is makkelijker te begrijpen.
 Daarna optimaliseren we de code en leggen uit waarom e.e.a. een verbetering is.
 
+- [x] #739
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
+
+
+
 ![Mijn afbeelding](evolutronix.png)
 
 
