@@ -134,7 +134,7 @@ Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt
 # C++ Example
 
 ```cpp
-  void processCommand(String command) {
+void processCommand(String command) {
     if (command.length() < 3) return;
     command = command.substring(1, command.length() - 1);
 
@@ -145,15 +145,25 @@ Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt
     if (mainCommand == "SEQ_SAVE") {
       Serial.println(F("seq ontvangen"));
       processSeqSave(parameters);
+       } else if (mainCommand == "SEQ_PROG") {
+        uint8_t sequencesToLoad = parameters.toInt();
+        if (sequencesToLoad <= 0 || sequencesToLoad > NUM_WALK_SEQUENCES) {
+            Serial.println(F("Ongeldig aantal sequences!"));
+        } else {
+            processSeqProg(sequencesToLoad); // Roep processSeqProg aan
+        }
     } else if (mainCommand == "PLAY") {
         currentState = PLAY_SEQUENCE;
         stateChangeTime = millis(); // Reset de timer
+    } else if (mainCommand == "SLIDE") {
+        slider(parameters); // Nieuwe functie om te stoppen      
     } else if (mainCommand == "STOP") {
         stopSequence(); // Nieuwe functie om te stoppen  
     } else {
       Serial.println("Onbekend commando!");
     }
   }
+
 
 ```
 
