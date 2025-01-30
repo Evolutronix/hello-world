@@ -98,6 +98,13 @@ Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een k
 
 ```
 
+
+
+De inputBuffer sturen we vervolgens verder naar de commandHandler.procesCommand
+Hier zal de String opgedeeld worden in het mainCommand en parameters.
+
+
+
 ### Command Processing: `SEQ_SAVE`
 
 Daarna zal gekeken worden wat het `mainCommand` is en verder doorgestuurd worden naar de bijbehorende functie.
