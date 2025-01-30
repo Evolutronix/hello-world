@@ -180,6 +180,10 @@ uint8_t sequenceCount = 0; // Huidig aantal opgeslagen sequences
 
 ```
 
+
+
+
+
 Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt als volgt:
 
 1. Controleert of het maximale aantal sequences is bereikt.  
