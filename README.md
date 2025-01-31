@@ -344,7 +344,7 @@ Wanneer het commando `PLAY` wordt ontvangen:
 1. De state machine wordt opgestart in `loop()`.  
 2. De **currentState** wordt gewijzigd naar `PLAY_SEQUENCE`.  
 3. De timer wordt gereset met:
-4. 
+ 
 # C++ Example
 
    ```cpp
@@ -355,9 +355,9 @@ Wanneer het commando `PLAY` wordt ontvangen:
 
 # C++ Example
 
-    ```cpp
+ ```cpp
     servos[i].Update();
-    ```
+  ```
 
 5. De functie playSequence(currentSequence); wordt aangeroepen, die:
 
