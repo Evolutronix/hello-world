@@ -291,9 +291,9 @@ Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt
    - En de functie begint met de volgende sequence.
    - 
 
-
 # C++ Example
 
+```cpp
   void processSeqSave(String parameters) {
     if (sequenceCount >= MAX_SEQUENCES) return;
 Serial.println(F("in save"));
@@ -332,10 +332,8 @@ Serial.println(F("in save"));
     sequenceCount++;
   }
 
-
-
-
 ```
+
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
