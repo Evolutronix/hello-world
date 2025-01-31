@@ -91,7 +91,7 @@ De data zal dan doorgetuurd worden naar een parser om de data te ontleden.
 
 ![Mijn afbeelding](flow_serial.png)
 
- C++ Example
+### C++ Example
 
 ```cpp
   while (Serial.available()) {
@@ -172,7 +172,7 @@ en deze functie verwerkt de parameters (in dit geval: **servo 1 bewegen naar pos
 
 ![Mijn afbeelding](flow_command_b.png)
 
- C++ Example
+### C++ Example
 
 ```cpp
 void processCommand(String command) {
