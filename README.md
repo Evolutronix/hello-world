@@ -83,6 +83,12 @@ Dit programma is ontwikkeld met het oog op flexibiliteit en uitbreidbaarheid. Ni
 
 Met dit programma biedt de **Arduino Nano PCA9685_HC-05 Servo Controller** een krachtige en veelzijdige oplossing voor servo- en robotica-projecten.
 
+
+#Receiving Data
+
+De data wordt karakter voor karakter binnengehaald, en bewaard in een variable inputBuffer.
+De data zal dan doorgetuurd worden naar een parser om de data te ontleden.
+
 ![Mijn afbeelding](flow_serial.png)
 
 # C++ Example
