@@ -112,8 +112,56 @@ De data zal dan doorgetuurd worden naar een parser om de data te ontleden.
 
 
 
-De inputBuffer wordt ontvangen door de commandHandler.procesCommand
-Hier zal de String opgedeeld worden in het mainCommand en parameters.
+# Serial Data Parsing
+
+Serial data wordt naar de Arduino gestuurd om ermee te communiceren.
+De Arduino ontvangt deze data en moet begrijpen wat ermee moet gebeuren.
+Om dit proces eenvoudiger en gestructureerd te maken, gebruiken we een protocol.
+In dit protocol spreken we af welke vorm de serial data heeft en wat de betekenis ervan is.
+
+Een protocol bestaat uit een commando gevolgd door de bijbehorende data.
+Wanneer de Arduino een commando ontvangt,
+weet deze welke actie uitgevoerd moet worden en hoe de bijgeleverde data gebruikt moet worden.
+
+## Protocol Structuur
+
+Het protocol heeft de volgende vorm:
+
+
+Enkele voorbeelden van commando's:
+
+- `<SEQ_SAVE,walk,180,10,90,8,10,20,80,5,90,8,180,25,45,15,120,8,10,20,180,10,90,60,2>`
+- `<PLAY>`
+- `<STOP>`
+- `<SLIDE,1,45>`
+- `<SEQ_PROG,3>`
+
+## Werking van het Protocol
+
+De Arduino leest elk ontvangen karakter van de serial data één voor één. Zodra het teken `<` wordt gedetecteerd,
+weet de Arduino dat een nieuw commando begint.
+De karakters die daarna volgen, worden opgeslagen in een buffer
+(bijvoorbeeld een `String inputBuffer`) totdat het teken `>` wordt gevonden.
+Dit teken markeert het einde van het commando.
+
+De opgeslagen string wordt vervolgens verwerkt. Dit gebeurt als volgt:
+
+1. Het eerste deel van de string (vóór de eerste komma) wordt opgeslagen als het **mainCommand**.
+2.  Dit bepaalt welke functie de Arduino moet uitvoeren.
+3. Het resterende deel van de string (alles na de eerste komma) wordt opgeslagen als **parameters**.
+4.  Deze data wordt doorgegeven aan de functie die door het commando wordt opgeroepen.
+
+## Voorbeeldverwerking
+
+Bijvoorbeeld, als de string `<SLIDE,1,45>` wordt ontvangen:
+
+- Het **mainCommand** is: `SLIDE`.
+- De **parameters** zijn: `1,45`.
+
+De Arduino roept vervolgens de functie aan die hoort bij het commando `SLIDE`,
+en deze functie verwerkt de parameters (in dit geval: **servo 1 bewegen naar positie 45 graden**).
+
+
 
 
 
