@@ -576,7 +576,7 @@ kunnen gebruiken zonder het programma te vertragen.
 PROGMEM, aantal_sequences
   ```
 
-aantal_sequences → Het aantal sequences dat geladen moet worden vanuit PROGMEM.
+* aantal_sequences → Het aantal sequences dat geladen moet worden vanuit PROGMEM.
 
 🎯 Voorbeeld
 
