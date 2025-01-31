@@ -91,7 +91,7 @@ De data zal dan doorgetuurd worden naar een parser om de data te ontleden.
 
 ![Mijn afbeelding](flow_serial.png)
 
-### C++ Example
+### C++ Code
 
 ```cpp
   while (Serial.available()) {
@@ -172,7 +172,7 @@ en deze functie verwerkt de parameters (in dit geval: **servo 1 bewegen naar pos
 
 ![Mijn afbeelding](flow_command_b.png)
 
-### C++ Example
+### C++ Code
 
 ```cpp
 void processCommand(String command) {
@@ -234,6 +234,7 @@ Elke servo-actie bevat drie belangrijke waarden:
 - **speed**: De snelheid waarmee de servo naar die positie beweegt.
 
 Hier is de definitie van de `ServoAction` struct:
+### C++ Code
 
 ```cpp
 struct ServoAction {
@@ -243,7 +244,7 @@ struct ServoAction {
 };
 
 
-# C++ Example
+### C++ Code
 
 ```cpp
 // Structuur voor een enkele Servo-actie
@@ -291,7 +292,7 @@ Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt
    - En de functie begint met de volgende sequence.
    - 
 
-# C++ Example
+### C++ Code
 
 ```cpp
   void processSeqSave(String parameters) {
@@ -345,7 +346,7 @@ Wanneer het commando `PLAY` wordt ontvangen:
 2. De **currentState** wordt gewijzigd naar `PLAY_SEQUENCE`.  
 3. De timer wordt gereset met:
  
-# C++ Example
+### C++ Code
 
    ```cpp
    stateChangeTime = millis(); // Reset de timer
@@ -353,7 +354,7 @@ Wanneer het commando `PLAY` wordt ontvangen:
 
 4. Alle servo's worden naar hun eindpositie gebracht met:
 
-# C++ Example
+### C++ Code
 
  ```cpp
     servos[i].Update();
@@ -370,7 +371,7 @@ Elke servo wordt beheerd door een StateMachine-klasse die de positie en snelheid
 # ⚙️ Definiëren van Servo's
 We gebruiken een array om maximaal 11 servo's op te slaan:
 
-# C++ Example
+### C++ Code
 
  ```cpp
     #define NUM_SERVOS 11
@@ -384,7 +385,7 @@ StateMachine servos[NUM_SERVOS] = {
   ```
 Elke servo wordt geïnitialiseerd en krijgt een doelpositie en snelheid:
 
-# C++ Example
+### C++ Code
 
  ```cpp
     for (int i = 0; i < NUM_SERVOS; i++) {
@@ -396,7 +397,7 @@ Elke servo wordt geïnitialiseerd en krijgt een doelpositie en snelheid:
 # 🔄 State Machine in de Loop
 De State Machine zorgt ervoor dat de servo's continu worden bijgewerkt:
 
-# C++ Example
+### C++ Code
 
  ```cpp
     switch (currentState) {
@@ -419,7 +420,7 @@ De State Machine zorgt ervoor dat de servo's continu worden bijgewerkt:
 # 🏗️ StateMachine Klasse
 De StateMachine-klasse regelt de beweging van elke individuele servo:
 
-# C++ Example
+### C++ Code
 
  ```cpp
     class StateMachine {
@@ -473,7 +474,7 @@ public:
 
 ## ✅ Controleren of Alle Servo's Op Hun Doelpositie Zijn
 
-# C++ Example
+### C++ Code
 
  ```cpp
     bool allServosAtTarget() {
@@ -489,7 +490,7 @@ public:
 # 🎬 Starten van een Sequence
 Wanneer een nieuwe sequence wordt gestart, worden de posities en snelheden van de servo's ingesteld:
 
-# C++ Example
+### C++ Code
 
  ```cpp
     void playSequence(uint8_t sequenceIndex) {
@@ -509,7 +510,7 @@ Met het SLIDE-commando kunnen we een servo direct naar een specifieke positie st
 📌 Gebruik van het SLIDE-commando
 
 
-# C++ Example
+### C++ Code
 
  ```cpp
 SLIDE, servoId, positie
@@ -527,7 +528,7 @@ SLIDE, 3, 90
 # 🛠 Implementatie in C++
 Hier is de functie die het SLIDE-commando verwerkt:
 
-# C++ Example
+### C++ Code
 
  ```cpp
 void slider(String parameters) {
