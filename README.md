@@ -214,7 +214,34 @@ Daarna zal gekeken worden wat het `mainCommand` is en verder doorgestuurd worden
 
 We kijken nu naar elk command, beginnend bij `SEQ_SAVE`.
 
-#### Command: `SEQ_SAVE`
+# Opslaan van Servo Posities en Snelheden met Structs
+
+Om de bewegingen van meerdere servo's te beheren, gebruiken we **structs** om gegevens gestructureerd op te slaan. Er zijn twee hoofdstructuren:
+
+1. **ServoAction**: Bewaart de instellingen van één servo-actie (welke servo, welke positie en snelheid).
+2. **Sequence**: Bevat een reeks van **ServoActions** voor alle servo's, waarmee een volledige beweging wordt gedefinieerd.
+
+Daarnaast houden we een array bij waarin meerdere sequences kunnen worden opgeslagen, zodat we verschillende bewegingen kunnen combineren en herhalen.
+
+---
+
+## Structuur voor een enkele Servo-actie  
+
+Elke servo-actie bevat drie belangrijke waarden:
+
+- **servoId**: Het ID van de servo die bewogen moet worden (bijv. 0 t/m 10 voor 11 servo's).
+- **position**: De gewenste positie van de servo (bijv. 0-180 graden).
+- **speed**: De snelheid waarmee de servo naar die positie beweegt.
+
+Hier is de definitie van de `ServoAction` struct:
+
+```cpp
+struct ServoAction {
+  uint8_t servoId;  // Servo nummer (0-10)
+  uint8_t position; // Positie in graden (0-180)
+  uint8_t speed;    // Snelheid van de beweging
+};
+
 
 # C++ Example
 
