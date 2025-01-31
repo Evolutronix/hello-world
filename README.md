@@ -565,7 +565,79 @@ void slider(String parameters) {
 }
 
   ```
+💾 Commando: PROGMEM, aantal_sequences
+Met het PROGMEM-commando kunnen we bewegingssequenties uit het flash-geheugen laden.
+Dit bespaart RAM-geheugen en zorgt ervoor dat we meerdere vooraf gedefinieerde loops
+kunnen gebruiken zonder het programma te vertragen.
 
+📌 Gebruik van het PROGMEM-commando
+
+ ```cpp
+PROGMEM, aantal_sequences
+  ```
+
+aantal_sequences → Het aantal sequences dat geladen moet worden vanuit PROGMEM.
+
+🎯 Voorbeeld
+
+ ```cpp
+PROGMEM, 3
+  ```
+🚀 Dit laadt de eerste 3 sequences uit het flash-geheugen en maakt ze beschikbaar voor gebruik.
+
+🛠 Implementatie in C++
+Hier is de functie die de sequences laadt uit PROGMEM:
+
+ ```cpp
+void loadSequencesFromProgmem(uint8_t sequencesToLoad) {
+    sequenceCount = 0; // Reset huidige sequences
+    for (uint8_t i = 0; i < sequencesToLoad && i < NUM_WALK_SEQUENCES; i++) {
+        Sequence newSequence;
+        newSequence.name = "PROGMEM_" + String(i); // Naam op basis van index
+        newSequence.actionCount = SEQUENCE_SIZE / 2; // Elke sequence bevat positie/snelheid-paren
+
+        for (int j = 0; j < SEQUENCE_SIZE; j += 2) {
+            uint8_t position = pgm_read_byte(&walkSequences[i][j]);
+            uint8_t speed = pgm_read_byte(&walkSequences[i][j + 1]);
+            ServoAction action = {j / 2, position, speed};
+            newSequence.servoActions[j / 2] = action;
+        }
+
+        sequences[sequenceCount++] = newSequence; // Toevoegen aan sequence-array
+        if (sequenceCount >= MAX_SEQUENCES) break; // Voorkom overflow
+    }
+
+    Serial.print(F("✅ Succesvol "));
+    Serial.print(sequencesToLoad);
+    Serial.println(F(" sequences geladen uit PROGMEM!"));
+}
+
+  ```
+📂 Hoe werkt het?
+De functie reset de huidige sequences.
+Leest de sequenties uit PROGMEM (flash-geheugen) en zet deze in een lijst.
+Elke sequence bevat paren van positie en snelheid.
+Controleert of de array niet over de limiet gaat.
+Geeft een bevestigingsbericht op de seriële monitor.
+
+🗂 Vooraf gedefinieerde sequences in PROGMEM
+
+
+ ```cpp
+#define SEQUENCE_SIZE 22 
+
+const uint8_t walkSequences[][SEQUENCE_SIZE] PROGMEM = {
+    {120, 5, 180, 6, 120, 6, 45, 10, 160, 10, 90, 5, 180, 6, 120, 6, 45, 10, 160, 10, 120, 20},
+    {45, 5, 110, 6, 20, 6, 45, 10, 160, 10, 90, 5, 180, 6, 120, 6, 45, 10, 160, 10, 120, 20},
+    {90, 5, 180, 6, 120, 6, 45, 10, 160, 10, 90, 5, 180, 6, 120, 6, 45, 10, 160, 10, 120, 20},
+    {45, 5, 110, 6, 20, 6, 45, 10, 160, 10, 90, 5, 180, 6, 120, 6, 45, 10, 160, 10, 120, 20},
+
+    // Voeg meer sequences toe indien nodig
+};
+
+  ```
+
+😃
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
