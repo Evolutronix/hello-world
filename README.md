@@ -370,7 +370,108 @@ Elke servo wordt beheerd door een StateMachine-klasse die de positie en snelheid
 # ⚙️ Definiëren van Servo's
 We gebruiken een array om maximaal 11 servo's op te slaan:
 
+# C++ Example
 
+ ```cpp
+    #define NUM_SERVOS 11
+
+StateMachine servos[NUM_SERVOS] = {
+  StateMachine(0, 20), StateMachine(1, 20), StateMachine(2, 20),
+  StateMachine(3, 20), StateMachine(4, 20), StateMachine(5, 20),
+  StateMachine(6, 20), StateMachine(7, 20), StateMachine(8, 20),
+  StateMachine(9, 20), StateMachine(10, 20)
+};
+  ```
+Elke servo wordt geïnitialiseerd en krijgt een doelpositie en snelheid:
+
+# C++ Example
+
+ ```cpp
+    for (int i = 0; i < NUM_SERVOS; i++) {
+      servos[i].setTargetPosition(90, 10);
+      servos[i].Update();
+    }
+  ```
+
+# 🔄 State Machine in de Loop
+De State Machine zorgt ervoor dat de servo's continu worden bijgewerkt:
+
+# C++ Example
+
+ ```cpp
+    switch (currentState) {
+      case PLAY_SEQUENCE:
+        for (uint8_t i = 0; i < NUM_SERVOS; i++) {
+          servos[i].Update();
+        }
+    
+        if (allServosAtTarget()) {
+          currentSequence = (currentSequence + 1) % sequenceCount;
+          playSequence(currentSequence);
+        }
+        break;
+    
+      default:
+        break;
+    }
+  ```
+
+# 🏗️ StateMachine Klasse
+De StateMachine-klasse regelt de beweging van elke individuele servo:
+
+# C++ Example
+
+ ```cpp
+    class StateMachine {
+  uint8_t servoChannel;
+  uint8_t currentPosition;
+  uint8_t targetPosition;
+  uint8_t increment;
+  uint8_t updateInterval;
+  unsigned long lastUpdate;
+
+public:
+  StateMachine(int channel, int interval) {
+    servoChannel = channel;
+    updateInterval = interval;
+    increment = 1;
+    currentPosition = 90;  // Startpositie
+    targetPosition = 90;   // Startpositie
+    lastUpdate = 0;
+  }
+
+  void Update() {
+    if ((millis() - lastUpdate) > updateInterval) {
+      lastUpdate = millis();
+
+      if (currentPosition < targetPosition) {
+        currentPosition += increment;
+        if (currentPosition > targetPosition) currentPosition = targetPosition;
+      } else if (currentPosition > targetPosition) {
+        currentPosition -= increment;
+        if (currentPosition < targetPosition) currentPosition = targetPosition;
+      }
+
+      pwm.setPWM(servoChannel, 0, angleToPWM(currentPosition));
+    }
+  }
+
+  void setTargetPosition(int position, int speed) {
+    targetPosition = position;
+    increment = speed > 0 ? speed : 1;  // Zorg dat de snelheid positief is
+  }
+
+  bool isAtTarget() {
+    return currentPosition == targetPosition;
+  }
+
+  uint8_t getCurrentPosition() const {
+    return currentPosition;
+  }
+};
+  ```
+
+## ✅ Controleren of Alle Servo's Op Hun Doelpositie Zijn
 
 
 > [!NOTE]
