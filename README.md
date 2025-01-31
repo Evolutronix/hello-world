@@ -337,8 +337,8 @@ Serial.println(F("in save"));
 ![Mijn afbeelding](images/flow_sequence_a.png)
 ![Mijn afbeelding](images/flow_sequence_b.png)
 
-# 🚀 PLAY Commando - Servo Bewegingsbesturing  
-# 🕹 State Machine Switch
+## 🚀 PLAY Commando - Servo Bewegingsbesturing  
+### 🕹 State Machine Switch
 Het **PLAY**-commando start de **State Machine** en activeert de bewegingssequenties van de servo's.  
 
 Wanneer het commando `PLAY` wordt ontvangen:  
