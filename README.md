@@ -473,6 +473,34 @@ public:
 
 ## ✅ Controleren of Alle Servo's Op Hun Doelpositie Zijn
 
+# C++ Example
+
+ ```cpp
+    bool allServosAtTarget() {
+  for (uint8_t i = 0; i < NUM_SERVOS; i++) {
+    if (!servos[i].isAtTarget()) {
+      return false;
+    }
+  }
+  return true;
+}
+  ```
+
+# 🎬 Starten van een Sequence
+Wanneer een nieuwe sequence wordt gestart, worden de posities en snelheden van de servo's ingesteld:
+
+# C++ Example
+
+ ```cpp
+    void playSequence(uint8_t sequenceIndex) {
+  Sequence sequence = sequences[sequenceIndex];
+  for (uint8_t i = 0; i < sequence.actionCount; i++) {
+    ServoAction action = sequence.servoActions[i];
+    servos[action.servoId].setTargetPosition(action.position, action.speed);
+  }
+}
+  ```
+
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
