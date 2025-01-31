@@ -501,15 +501,69 @@ Wanneer een nieuwe sequence wordt gestart, worden de posities en snelheden van d
 }
   ```
 
+# 🎛 Commando: SLIDE, servoId, positie
+Met het SLIDE-commando kunnen we een servo direct naar een specifieke positie sturen. Dit commando wordt vaak gebruikt wanneer:
+✅ Een slider in de GUI wordt bewogen.
+✅ De positie handmatig wordt ingevoerd in een seriële monitor.
 
----
+📌 Gebruik van het SLIDE-commando
 
-Met deze versie:
-- ✅ **Helderder uitleg** met genummerde stappen en overzichtelijke secties.
-- 🛠 **Meer emoji’s** voor een visuele indeling.
-- 📌 **Duidelijkere koppen** en codeblokken.
 
-Wil je nog extra aanpassingen? 😃
+# C++ Example
+
+ ```cpp
+SLIDE, servoId, positie
+  ```
+servoId → Het ID-nummer van de servo (bijv. 0 t/m 10 voor 11 servo's).
+positie → De gewenste positie in graden (0-180).
+🎯 Voorbeeld
+
+ ```cpp
+SLIDE, 3, 90
+  ```
+
+🚀 Dit zal servo 3 direct verplaatsen naar 90 graden.
+
+# 🛠 Implementatie in C++
+Hier is de functie die het SLIDE-commando verwerkt:
+
+# C++ Example
+
+ ```cpp
+void slider(String parameters) {
+    // Splits de parameters op basis van een komma
+    int commaIndex = parameters.indexOf(',');
+    if (commaIndex == -1) {
+        Serial.println("⚠️ Fout: Onjuiste SLIDER parameters.");
+        return;
+    }
+
+    // Haal de servo ID en de gewenste positie uit de parameters
+    String servoIdStr = parameters.substring(0, commaIndex);
+    String positionStr = parameters.substring(commaIndex + 1);
+
+    // Zet de waarden om naar integers
+    int servoId = servoIdStr.toInt();
+    int position = positionStr.toInt();
+
+    // Controleer of de servo ID geldig is
+    if (servoId >= 0 && servoId < NUM_SERVOS) {
+        // Converteer de positie naar PWM-ticks en stuur naar de PCA9685
+        int ticks = angleToPWM(position);
+        pwm.setPWM(servoId, 0, ticks);
+
+        // Bevestiging naar de seriële monitor
+        Serial.print("✅ Servo ");
+        Serial.print(servoId);
+        Serial.print(" ingesteld op ");
+        Serial.print(position);
+        Serial.println(" graden.");
+    } else {
+        Serial.println("❌ Fout: Ongeldig servo ID.");
+    }
+}
+
+  ```
 
 
 > [!NOTE]
