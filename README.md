@@ -336,6 +336,64 @@ Serial.println(F("in save"));
 ![Mijn afbeelding](images/flow_sequence_a.png)
 ![Mijn afbeelding](images/flow_sequence_b.png)
 
+# 🚀 PLAY Commando - Servo Bewegingsbesturing  
+
+Het **PLAY**-commando start de **State Machine** en activeert de bewegingssequenties van de servo's.  
+
+Wanneer het commando `PLAY` wordt ontvangen:  
+1. De state machine wordt opgestart in `loop()`.  
+2. De **currentState** wordt gewijzigd naar `PLAY_SEQUENCE`.  
+3. De timer wordt gereset met:  
+
+   ```cpp
+   stateChangeTime = millis(); // Reset de timer
+  ```
+4. Alle servo's worden naar hun eindpositie gebracht met:
+    ```cpp
+    servos[i].Update();
+    ```
+5. De functie playSequence(currentSequence); wordt aangeroepen, die:
+
+De posities en snelheden van de servo’s bijwerkt.
+Controleert of alle servo’s hun eindpositie hebben bereikt.
+Als alle servo's hun eindpositie hebben bereikt, wordt de teller verhoogd en start de volgende sequence.
+
+
+Hier is een duidelijke uitleg in Markdown voor je GitHub README.md:
+
+markdown
+Kopiëren
+Bewerken
+# 🚀 PLAY Commando - Servo Bewegingsbesturing  
+
+Het **PLAY**-commando start de **State Machine** en activeert de bewegingssequenties van de servo's.  
+
+Wanneer het commando `PLAY` wordt ontvangen:  
+1. De state machine wordt opgestart in `loop()`.  
+2. De **currentState** wordt gewijzigd naar `PLAY_SEQUENCE`.  
+3. De timer wordt gereset met:  
+
+   ```cpp
+   stateChangeTime = millis(); // Reset de timer
+```
+4. Alle servo's worden naar hun eindpositie gebracht met:
+   
+   ```cpp
+servos[i].Update();
+   ```
+5. De functie playSequence(currentSequence); wordt aangeroepen, die:
+
+De posities en snelheden van de servo’s bijwerkt.
+Controleert of alle servo’s hun eindpositie hebben bereikt.
+Als alle servo's hun eindpositie hebben bereikt, wordt de teller verhoogd en start de volgende sequence.
+# 🔧 Structuur van de Servo State Machine
+Elke servo wordt beheerd door een StateMachine-klasse die de positie en snelheid regelt.
+
+# ⚙️ Definiëren van Servo's
+We gebruiken een array om maximaal 11 servo's op te slaan:
+
+
+
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
