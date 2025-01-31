@@ -343,12 +343,18 @@ Het **PLAY**-commando start de **State Machine** en activeert de bewegingssequen
 Wanneer het commando `PLAY` wordt ontvangen:  
 1. De state machine wordt opgestart in `loop()`.  
 2. De **currentState** wordt gewijzigd naar `PLAY_SEQUENCE`.  
-3. De timer wordt gereset met:  
+3. De timer wordt gereset met:
+4. 
+# C++ Example
 
    ```cpp
    stateChangeTime = millis(); // Reset de timer
   ```
+
 4. Alle servo's worden naar hun eindpositie gebracht met:
+
+# C++ Example
+
     ```cpp
     servos[i].Update();
     ```
