@@ -292,6 +292,51 @@ Het roept de functie `processSeqSave(String parameters)` aan. Deze functie werkt
    - 
 
 
+# C++ Example
+
+  void processSeqSave(String parameters) {
+    if (sequenceCount >= MAX_SEQUENCES) return;
+Serial.println(F("in save"));
+    int firstComma = parameters.indexOf(',');
+    if (firstComma == -1) return;
+
+    String sequenceName = parameters.substring(0, firstComma);
+    parameters = parameters.substring(firstComma + 1);
+
+    Sequence newSequence;
+    newSequence.name = sequenceName;
+    newSequence.actionCount = 0;
+
+    while (parameters.length() > 0 && newSequence.actionCount < 12) {
+      uint8_t commaIndex1 = parameters.indexOf(',');
+      if (commaIndex1 == -1) break;
+      uint8_t position = parameters.substring(0, commaIndex1).toInt();
+      parameters = parameters.substring(commaIndex1 + 1);
+
+      uint8_t commaIndex2 = parameters.indexOf(',');
+      uint8_t speed;
+      if (commaIndex2 != -1) {
+        speed = parameters.substring(0, commaIndex2).toInt();
+        parameters = parameters.substring(commaIndex2 + 1);
+      } else {
+        speed = parameters.toInt();
+        parameters = "";
+      }
+
+      ServoAction action = {newSequence.actionCount, position, speed};
+      newSequence.servoActions[newSequence.actionCount] = action;
+      newSequence.actionCount++;
+    }
+
+    sequences[sequenceCount] = newSequence;
+    sequenceCount++;
+  }
+
+
+
+
+```
+
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
