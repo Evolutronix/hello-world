@@ -333,6 +333,8 @@ Serial.println(F("in save"));
   }
 
 ```
+![Mijn afbeelding](images/flow_sequence_a.png)
+![Mijn afbeelding](images/flow_sequence_b.png)
 
 
 > [!NOTE]
