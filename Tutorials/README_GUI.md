@@ -102,7 +102,7 @@ Met een **gestructureerde aanpak** bouwen we een robuuste interface met **slider
 🔹 **Laatste update:** *DD-MM-YYYY*  
 
 
-
+![Mijn afbeelding](images/UART.png)
 
 
 
