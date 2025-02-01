@@ -636,6 +636,7 @@ const uint8_t walkSequences[][SEQUENCE_SIZE] PROGMEM = {
 };
 
   ```
+![Mijn afbeelding](images/flow_progmem.png)
 
 😃
 
